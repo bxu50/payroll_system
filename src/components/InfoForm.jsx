@@ -121,7 +121,7 @@ class InfoForm extends Component {
               </Form.Control.Feedback>
             </Form.Group>
           </Form.Row>
-          <Button type="submit">Submit form</Button>
+          <Button type="submit">Generate payslip</Button>
         </Form>
       </StyledInfoForm>
     );

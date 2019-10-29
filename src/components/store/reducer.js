@@ -65,6 +65,8 @@ export default (state = defaultState, action) => {
             return state.set("Complete", true)
         case ('validateIncomplete'):
             return state.set("Complete", false)
+        case ('triggerBack'):
+            return state.set("Complete", false)
         case ('formSubmit'):
             let Salary = Number(action.formData.get('salary'));
             let SuperRate = Number(action.formData.get('superRate'));

@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import InfoForm from './components/InfoForm'
-import PayrollTable from './components/PayrollTable'
+import PayslipTable from './components/PayslipTable'
 import { Provider } from 'react-redux';
 import {BrowserRouter, Route } from 'react-router-dom'
 import store from './store'
@@ -13,7 +13,7 @@ class PayRoll extends Component {
       <Provider store = {store}>
         <BrowserRouter>
       <Route path = '/' exact component = {InfoForm}></Route>
-      <Route path = '/payslip' exact component = {PayrollTable}></Route>
+      <Route path = '/payslip' exact component = {PayslipTable}></Route>
       </BrowserRouter>
       </Provider>
 
