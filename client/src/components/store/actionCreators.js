@@ -1,6 +1,9 @@
 import * as constants from './constants';
 import { fromJS } from 'immutable';
+import { toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios'
+import { ToastsStore } from 'react-toasts';
 
 export const formValidate = () => ({
     type: 'formValidate'
@@ -25,28 +28,31 @@ export const validateIncomplete = () => ({
     type: 'validateIncomplete'
 })
 
-export const triggerBack = ()=>({
+export const triggerBack = () => ({
     type: 'triggerBack'
 })
 
 export const postTable = (tableData) => {
-    return (dispatch)=>{
+    return (dispatch) => {
         axios.post('http://localhost:5000/payslip/post', {
             tableData: tableData
-        }).then((res)=>{
+        }).then((res) => {
             console.log(res)
+            ToastsStore.success(res.data)
             dispatch(triggerBack())
-            alert(res.data)
-        }).catch((err)=>{
-            if(err.response.status ==400){
-                alert(err.response.data)
+
+
+
+        }).catch((err) => {
+            if (err.response.status == 400) {
+                ToastsStore.error(err.response.data)
             }
-           
+
         })
-            
+
     }
-        
-        
+
+
 }
 
 

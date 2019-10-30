@@ -96,7 +96,7 @@ class InfoForm extends Component {
                   <InputGroup.Text id="inputGroupPrepend">%</InputGroup.Text>
                 </InputGroup.Prepend>
                 <Form.Control
-                  type="text"
+                  type="number"
                   min="1"
                   max="100"
                   aria-describedby="inputGroupPrepend"
