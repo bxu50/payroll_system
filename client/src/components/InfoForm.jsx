@@ -32,7 +32,7 @@ class InfoForm extends Component {
     }
     return (
       <StyledInfoForm>
-        <h1>Customer Information</h1>
+        <h1>Employee Information</h1>
         <Form
           noValidate
           validated={validate}
@@ -47,6 +47,7 @@ class InfoForm extends Component {
               <Form.Control
                 required
                 type="text"
+                value = {formData.get('firstName')}
                 placeholder="First name"
                 onChange={handleInputChange("firstName")}
               />
@@ -59,6 +60,7 @@ class InfoForm extends Component {
               <Form.Control
                 required
                 type="text"
+                value = {formData.get('lastName')}
                 placeholder="Last name"
                 onChange={handleInputChange("lastName")}
               />
@@ -68,9 +70,9 @@ class InfoForm extends Component {
             </Form.Group>
           </Form.Row>
           <Form.Row>
-            <Form.Group as={Col} md="4" controlId="validationCustom03">
+            <Form.Group as={Col} md="6" controlId="validationCustom03">
               <Form.Label>Salary</Form.Label>
-              <InputGroup onChange={handleInputChange("salary")}>
+              <InputGroup>
                 <InputGroup.Prepend>
                   <InputGroup.Text id="inputGroupPrepend">$</InputGroup.Text>
                 </InputGroup.Prepend>
@@ -79,6 +81,8 @@ class InfoForm extends Component {
                   type="number"
                   step="0.01"
                   placeholder="Salary"
+                  value = {formData.get('salary')}
+                  onChange={handleInputChange("salary")}
                   aria-describedby="inputGroupPrepend"
                   aria-describedby="inputGroupApend"
                   required
@@ -89,9 +93,9 @@ class InfoForm extends Component {
               </InputGroup>
             </Form.Group>
 
-            <Form.Group as={Col} md="3" controlId="validationCustom04">
+            <Form.Group as={Col} md="6" controlId="validationCustom04">
               <Form.Label>Super Rate</Form.Label>
-              <InputGroup onChange={handleInputChange("superRate")}>
+              <InputGroup >
                 <InputGroup.Prepend>
                   <InputGroup.Text id="inputGroupPrepend">%</InputGroup.Text>
                 </InputGroup.Prepend>
@@ -99,6 +103,8 @@ class InfoForm extends Component {
                   type="number"
                   min="1"
                   max="100"
+                  onChange={handleInputChange("superRate")}
+                  value = {formData.get('superRate')}
                   aria-describedby="inputGroupPrepend"
                   placeholder="Super Rate"
                   required
@@ -108,18 +114,7 @@ class InfoForm extends Component {
                 </Form.Control.Feedback>
               </InputGroup>
             </Form.Group>
-            <Form.Group as={Col} md="5" controlId="validationCustom05">
-              <Form.Label>Date</Form.Label>
-              <Form.Control
-                type="date"
-                placeholder="Date"
-                onChange={handleInputChange("date")}
-                required
-              />
-              <Form.Control.Feedback type="invalid">
-                Please provide a valid date.
-              </Form.Control.Feedback>
-            </Form.Group>
+
           </Form.Row>
           <Button type="submit">Generate payslip</Button>
         </Form>

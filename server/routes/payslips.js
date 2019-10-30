@@ -2,17 +2,6 @@ var express = require('express');
 var router = express.Router();
 var Payslip = require('../models/payslip')
 var moment = require('moment')
-router.get('/api', function (req, res, next) {
-  res.render('index', { title: 'Payslip' });
-});
-router.get('/get', async function (req, res, next) {
-  // if(await Payslip.exists({$and: [{firstName: "Wenhao"}, {lastName: "Lin"}]})){
-  //   console.log(moment(2019-10-03, "YYYY-MM-DD").date(30))
-  // }
-
-  res.send('hello')
-});
-
 router.post('/post', async function (req, res) {
 
   var payload = req.body.tableData
@@ -34,7 +23,6 @@ router.post('/post', async function (req, res) {
 
     payslip.save(err => {
       if (err) {
-        console.log(err);
         res.status(400).send('cannot create payslip')
       }
       res.status(200).send('payslip added')

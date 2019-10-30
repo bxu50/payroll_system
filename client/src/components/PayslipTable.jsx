@@ -35,7 +35,7 @@ class PayrollTable extends Component {
       handleOnClick,
       handleBack
     } = this.props;
-    if (this.props.validateComplete ===false) {
+    if (validateComplete === false) {
       return <Redirect to="/" />;
     }
     return (
@@ -132,13 +132,6 @@ class PayrollTable extends Component {
                 ></NumberFormat>
               </td>
             </tr>
-            {/* {tableData.map(items => {
-             return items.map(item => {
-                return (
-               <div>{console.log(item)}</div>
-                );
-              });
-            })} */}
           </tbody>
         </Table>
         <Link to="/">
@@ -158,7 +151,6 @@ class PayrollTable extends Component {
       </StyledWrapper>
     );
   }
-
 }
 const mapState = state => ({
   tableData: state.getIn(["form", "tableData"]),
@@ -175,7 +167,6 @@ const mapDispatch = dispatch => ({
     dispatch(actionCreators.triggerBack());
   }
 });
-
 
 export default connect(
   mapState,

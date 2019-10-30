@@ -5,9 +5,8 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 require('dotenv').config();
 const mongoose = require('mongoose')
-mongoose.connect(process.env.DB_URL, { useNewUrlParser: true, useCreateIndex: true,  useUnifiedTopology: true }, function (err) {
-  console.log(err)
-})
+mongoose.connect(process.env.DB_URL, { useNewUrlParser: true, useCreateIndex: true,  useUnifiedTopology: true }
+)
 
 var payslipRouter = require('./routes/payslips');
 

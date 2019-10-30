@@ -1,6 +1,5 @@
 import * as constants from './constants';
 import { fromJS } from 'immutable';
-import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios'
 import { ToastsStore } from 'react-toasts';
@@ -31,21 +30,24 @@ export const validateIncomplete = () => ({
 export const triggerBack = () => ({
     type: 'triggerBack'
 })
-
+const clearFormBack = ()=>({
+    type: 'clearFormBack'
+})
 export const postTable = (tableData) => {
     return (dispatch) => {
-        axios.post('http://localhost:5000/payslip/post', {
+        axios.post('/payslip/post', {
             tableData: tableData
         }).then((res) => {
-            console.log(res)
             ToastsStore.success(res.data)
-            dispatch(triggerBack())
-
-
+            dispatch(clearFormBack())
 
         }).catch((err) => {
             if (err.response.status == 400) {
                 ToastsStore.error(err.response.data)
+            }
+            if(err.response.status == 500){
+                ToastsStore.error("Database or server is not runing properly")
+
             }
 
         })
