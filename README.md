@@ -22,5 +22,8 @@ As this project has a server side and a client side
 5. Do the same thing at server side `npm install` `npm start`,  front-end is running on port 3000
 6. open [http://localhost:3000](http://localhost:3000)
 
+## Demo
+![](demo.gif)
+
 
 
