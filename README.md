@@ -20,7 +20,7 @@ As this project has a server side and a client side
 1. `cd payroll_system` to go to the project
 2. Then install the node_modules `npm install`
 ### running locally
-1. run the server `npm run dev`, front-end will running on port 3000, the server will run on 5000
+1. run the server and frontend at same time `npm run dev`, front-end will running on port 3000, the server will run on 5000
 2. open [http://localhost:3000](http://localhost:3000)
 
 ### running test
