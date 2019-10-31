@@ -34,10 +34,13 @@ router.post("/post", async function(req, res) {
 
     payslip.save(err => {
       if (err) {
-        res.status(400).send("This person is already paid in this month");
+        res.status(400).send("cannot create payslip");
       }
       res.status(200).send("payslip added");
     });
+  } else{
+    res.status(400).send('This person is already paid in this month')
+
   }
 });
 module.exports = router;
