@@ -8,23 +8,23 @@ import dateFormat from "dateformat";
 import NumberFormat from "react-number-format";
 import { actionCreators } from "./store";
 const StyledWrapper = styled(Wrapper)`
-display: grid;
-grid-template-columns: 1fr 1fr 1fr 1fr;
-text-align: left;
-align-items: center;
-.heading{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  text-align: left;
+  align-items: center;
+  .heading{
     grid-column-start: 1; 
     grid-column-end: 5; 
-}
-.back{
+  }
+  .back{
     width: 120px
-}
-.pay{
+  }
+  .pay{
     grid-column-start: 4; 
     grid-column-end: 5; 
     width: 120px
     align-items: right;
-}
+  }
 `;
 
 class PayrollTable extends Component {
@@ -35,7 +35,7 @@ class PayrollTable extends Component {
       handleOnClick,
       handleBack
     } = this.props;
-    if (validateComplete === false) {
+    if (!validateComplete) {
       return <Redirect to="/" />;
     }
     return (
@@ -66,10 +66,10 @@ class PayrollTable extends Component {
                 <NumberFormat
                   value={tableData.getIn(["annualIncome", "value"])}
                   displayType={"text"}
-                  thousandSeparator={true}
+                  thousandSeparator
                   prefix={"$"}
                   renderText={value => <div>{value}</div>}
-                ></NumberFormat>
+                />
               </td>
             </tr>
             <tr>
@@ -78,10 +78,10 @@ class PayrollTable extends Component {
                 <NumberFormat
                   value={tableData.getIn(["grossIncome", "value"])}
                   displayType={"text"}
-                  thousandSeparator={true}
+                  thousandSeparator
                   prefix={"$"}
                   renderText={value => <div>{value}</div>}
-                ></NumberFormat>
+                />
               </td>
             </tr>
             <tr>
@@ -90,10 +90,10 @@ class PayrollTable extends Component {
                 <NumberFormat
                   value={tableData.getIn(["incomeTax", "value"])}
                   displayType={"text"}
-                  thousandSeparator={true}
+                  thousandSeparator
                   prefix={"$"}
                   renderText={value => <div>{value}</div>}
-                ></NumberFormat>
+                />
               </td>
             </tr>
             <tr>
@@ -102,10 +102,10 @@ class PayrollTable extends Component {
                 <NumberFormat
                   value={tableData.getIn(["netIncome", "value"])}
                   displayType={"text"}
-                  thousandSeparator={true}
+                  thousandSeparator
                   prefix={"$"}
                   renderText={value => <div>{value}</div>}
-                ></NumberFormat>
+                />
               </td>
             </tr>
             <tr>
@@ -114,10 +114,10 @@ class PayrollTable extends Component {
                 <NumberFormat
                   value={tableData.getIn(["super", "value"])}
                   displayType={"text"}
-                  thousandSeparator={true}
+                  thousandSeparator
                   prefix={"$"}
                   renderText={value => <div>{value}</div>}
-                ></NumberFormat>
+                />
               </td>
             </tr>
             <tr>
@@ -126,28 +126,24 @@ class PayrollTable extends Component {
                 <NumberFormat
                   value={tableData.getIn(["pay", "value"])}
                   displayType={"text"}
-                  thousandSeparator={true}
+                  thousandSeparator
                   prefix={"$"}
                   renderText={value => <div>{value}</div>}
-                ></NumberFormat>
+                />
               </td>
             </tr>
           </tbody>
         </Table>
-        <Link to="/">
-          <Button className="back" type="submit" onClick={handleBack}>
-            Back
-          </Button>
-        </Link>
-        <Link to="/" className="pay">
-          <Button
-            className="pay"
-            type="submit"
-            onClick={() => handleOnClick(tableData)}
-          >
-            Pay
-          </Button>
-        </Link>
+        <Button className="back" type="submit" onClick={handleBack}>
+          Back
+        </Button>
+        <Button
+          className="pay"
+          type="submit"
+          onClick={() => handleOnClick(tableData)}
+        >
+          Pay
+        </Button>
       </StyledWrapper>
     );
   }

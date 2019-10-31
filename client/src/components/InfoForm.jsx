@@ -7,13 +7,13 @@ import { actionCreators } from "./store";
 import { Form, Col, InputGroup, Button } from "react-bootstrap";
 
 const StyledInfoForm = styled(Wrapper)`
-    padding: 2rem 3rem;
-    border-radius: 1rem;
-    text-align: center;
-    margin-top: 100px
-    display: grid;
-    align-items: center;
-    justify-content: center;
+  padding: 2rem 3rem;
+  border-radius: 1rem;
+  text-align: center;
+  margin-top: 100px
+  display: grid;
+  align-items: center;
+  justify-content: center;
 `;
 class InfoForm extends Component {
   render() {
@@ -47,7 +47,7 @@ class InfoForm extends Component {
               <Form.Control
                 required
                 type="text"
-                value = {formData.get('firstName')}
+                value={formData.get("firstName")}
                 placeholder="First name"
                 onChange={handleInputChange("firstName")}
               />
@@ -60,7 +60,7 @@ class InfoForm extends Component {
               <Form.Control
                 required
                 type="text"
-                value = {formData.get('lastName')}
+                value={formData.get("lastName")}
                 placeholder="Last name"
                 onChange={handleInputChange("lastName")}
               />
@@ -81,7 +81,7 @@ class InfoForm extends Component {
                   type="number"
                   step="0.01"
                   placeholder="Salary"
-                  value = {formData.get('salary')}
+                  value={formData.get("salary")}
                   onChange={handleInputChange("salary")}
                   aria-describedby="inputGroupPrepend"
                   aria-describedby="inputGroupApend"
@@ -95,7 +95,7 @@ class InfoForm extends Component {
 
             <Form.Group as={Col} md="6" controlId="validationCustom04">
               <Form.Label>Super Rate</Form.Label>
-              <InputGroup >
+              <InputGroup>
                 <InputGroup.Prepend>
                   <InputGroup.Text id="inputGroupPrepend">%</InputGroup.Text>
                 </InputGroup.Prepend>
@@ -104,7 +104,7 @@ class InfoForm extends Component {
                   min="1"
                   max="100"
                   onChange={handleInputChange("superRate")}
-                  value = {formData.get('superRate')}
+                  value={formData.get("superRate")}
                   aria-describedby="inputGroupPrepend"
                   placeholder="Super Rate"
                   required
@@ -114,7 +114,6 @@ class InfoForm extends Component {
                 </Form.Control.Feedback>
               </InputGroup>
             </Form.Group>
-
           </Form.Row>
           <Button type="submit">Generate payslip</Button>
         </Form>
