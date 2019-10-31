@@ -35,7 +35,7 @@ const clearFormBack = ()=>({
 })
 export const postTable = (tableData) => {
     return (dispatch) => {
-        axios.post('/payslip/post', {
+        axios.post('http://localhost:5000/payslip/post', {
             tableData: tableData
         }).then((res) => {
             ToastsStore.success(res.data)
