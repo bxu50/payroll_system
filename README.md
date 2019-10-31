@@ -15,12 +15,17 @@ This project is the code Challenge of Myob to do a payroll system. It is deploye
 You need to install Node.js to run the following script.
 
 As this project has a server side and a client side
-1. `cd server` to go into server file
+
+### installation
+1. `cd payroll_system` to go to the project
 2. Then install the node_modules `npm install`
-3. run the server `npm start`, the server will run on port 5000
-4. Open a New terminal window, and go to client file `cd client`
-5. Do the same thing at server side `npm install` `npm start`,  front-end is running on port 3000
-6. open [http://localhost:3000](http://localhost:3000)
+### running locally
+1. run the server `npm run dev`, front-end will running on port 3000, the server will run on 5000
+2. open [http://localhost:3000](http://localhost:3000)
+
+### running test
+1. make sure to run npm run dev first and keep the server running
+2. `npm run test` to lauch the test
 
 ## Demo
 ![payroll demo](/demo.gif)
