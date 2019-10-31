@@ -1,5 +1,5 @@
 
-## Introduction adn Assumption
+## Introduction and Assumption
 
 This project is the code Challenge of Myob to do a payroll system. It is deployed on Heroku and avaliable on URL: [https://payrollsystemmyob.herokuapp.com](https://payrollsystemmyob.herokuapp.com)
 
