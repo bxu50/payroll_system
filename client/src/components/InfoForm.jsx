@@ -144,6 +144,7 @@ const mapDispatch = dispatch => {
     handleSubmit(formData) {
       window.event.preventDefault();
       dispatch(actionCreators.formSubmit(formData));
+      dispatch(actionCreators.dataCalculation(formData))
     },
     handleInputChange(key) {
       return event => {

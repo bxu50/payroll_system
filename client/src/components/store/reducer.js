@@ -12,7 +12,7 @@ const defaultState = fromJS({
   tableData: {
     firstName: {
       name: "First Name",
-      Value: ""
+      value: ""
     },
     lastName: {
       name: "Last Name",
@@ -40,6 +40,10 @@ const defaultState = fromJS({
     },
     netIncome: {
       name: "Net Income",
+      value: ""
+    },
+    superRate: {
+      name: "superRate",
       value: ""
     },
     super: {
@@ -74,7 +78,8 @@ export default (state = defaultState, action) => {
         .setIn(["formData", "lastName"], "")
         .setIn(["formData", "salary"], "")
         .setIn(["formData", "superRate"], "");
-    case constants.FORM_SUBMIT:
+
+    case constants.DATA_CALCULATION:
       let Salary = Number(action.formData.get("salary"));
       let SuperRate = Number(action.formData.get("superRate"));
       const TaxCalculation = Salary => {
@@ -113,7 +118,14 @@ export default (state = defaultState, action) => {
         NP.round(NP.times(GrossIncome, NP.times(SuperRate, 0.01)), 0)
       );
       let Pay = fromJS(NP.minus(NetIncome, Super));
-
+      return state
+        .setIn(["tableData", "payPeriod", "value"], moment().date(28))
+        .setIn(["tableData", "grossIncome", "value"], GrossIncome)
+        .setIn(["tableData", "incomeTax", "value"], Tax)
+        .setIn(["tableData", "netIncome", "value"], NetIncome)
+        .setIn(["tableData", "super", "value"], Super)
+        .setIn(["tableData", "pay", "value"], Pay);
+    case constants.FORM_SUBMIT:
       return state
         .setIn(
           ["tableData", "firstName", "value"],
@@ -127,12 +139,10 @@ export default (state = defaultState, action) => {
           ["tableData", "annualIncome", "value"],
           action.formData.get("salary")
         )
-        .setIn(["tableData", "payPeriod", "value"], moment().date(28))
-        .setIn(["tableData", "grossIncome", "value"], GrossIncome)
-        .setIn(["tableData", "incomeTax", "value"], Tax)
-        .setIn(["tableData", "netIncome", "value"], NetIncome)
-        .setIn(["tableData", "super", "value"], Super)
-        .setIn(["tableData", "pay", "value"], Pay);
+        .setIn(
+            ["tableData", "superRate", "value"],
+            action.formData.get("superRate")
+          );
     default:
       return state;
   }

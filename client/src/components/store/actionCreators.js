@@ -18,6 +18,10 @@ export const formSubmit = formData => ({
   type: constants.FORM_SUBMIT,
   formData
 });
+export const dataCalculation = formData=>({
+    type: constants.DATA_CALCULATION,
+    formData
+})
 
 export const validateComplete = () => ({
   type: constants.VALIDATE_COMPLETE
