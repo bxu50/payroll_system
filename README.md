@@ -23,7 +23,7 @@ As this project has a server side and a client side
 6. open [http://localhost:3000](http://localhost:3000)
 
 ## Demo
-![](demo.gif)
+![payroll demo](/demo.gif)
 
 
 
