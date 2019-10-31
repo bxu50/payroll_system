@@ -18,10 +18,10 @@ export const formSubmit = formData => ({
   type: constants.FORM_SUBMIT,
   formData
 });
-export const dataCalculation = formData=>({
-    type: constants.DATA_CALCULATION,
-    formData
-})
+export const dataCalculation = formData => ({
+  type: constants.DATA_CALCULATION,
+  formData
+});
 
 export const validateComplete = () => ({
   type: constants.VALIDATE_COMPLETE
@@ -48,10 +48,10 @@ export const postTable = tableData => {
         dispatch(clearFormBack());
       })
       .catch(err => {
-        if (err.response.status == 400) {
+        if (err.response.status === 400) {
           ToastsStore.error(err.response.data);
         }
-        if (err.response.status == 500) {
+        if (err.response.status === 500) {
           ToastsStore.error("Database or server is not runing properly");
         }
       });

@@ -82,37 +82,8 @@ export default (state = defaultState, action) => {
     case constants.DATA_CALCULATION:
       let Salary = Number(action.formData.get("salary"));
       let SuperRate = Number(action.formData.get("superRate"));
-      const TaxCalculation = Salary => {
-        let tax;
-        if (Salary <= 18200) {
-          tax = 0;
-          return tax;
-        } else if (Salary >= 18201 && Salary <= 37000) {
-          tax = NP.round(NP.divide(NP.times(Salary - 18200, 0.19), 12), 0);
-          return tax;
-        } else if (Salary >= 37001 && Salary <= 87000) {
-          tax = NP.round(
-            NP.divide(3572 + NP.times(Salary - 37000, 0.325), 12),
-            0
-          );
-          return tax;
-        } else if (Salary >= 87001 && Salary <= 180000) {
-          tax = NP.round(
-            NP.divide(19822 + NP.times(Salary - 87000, 0.37), 12),
-            0
-          );
-          return tax;
-        } else if (Salary >= 180001) {
-          tax = NP.round(
-            NP.divide(54232 + NP.times(Salary - 180000, 0.45), 12),
-            0
-          );
-          return tax;
-        }
-      };
-
       let GrossIncome = fromJS(NP.round(Salary / 12, 0));
-      let Tax = fromJS(TaxCalculation(Salary));
+      let Tax = fromJS(FindTax(Salary));
       let NetIncome = fromJS(GrossIncome - Tax);
       let Super = fromJS(
         NP.round(NP.times(GrossIncome, NP.times(SuperRate, 0.01)), 0)
@@ -140,10 +111,55 @@ export default (state = defaultState, action) => {
           action.formData.get("salary")
         )
         .setIn(
-            ["tableData", "superRate", "value"],
-            action.formData.get("superRate")
-          );
+          ["tableData", "superRate", "value"],
+          action.formData.get("superRate")
+        );
     default:
       return state;
   }
+};
+const taxRate = [
+  {
+    min: 0,
+    max: 18200,
+    rate: 0,
+    baseAmount: 0
+  },
+  {
+    min: 18200,
+    max: 37000,
+    rate: 0.19,
+    baseAmount: 0
+  },
+  {
+    min: 37000,
+    max: 87000,
+    rate: 0.325,
+    baseAmount: 3572
+  },
+  {
+    min: 87000,
+    max: 180000,
+    rate: 0.37,
+    baseAmount: 19822
+  },
+  {
+    min: 180000,
+    max: null,
+    rate: 0.45,
+    baseAmount: 54232
+  }
+];
+const FindTax = Salary => {
+  const taxList = taxRate.map(item => {
+    let tax;
+    if (Salary > item.min && Salary < item.max) {
+      tax = NP.round(
+        NP.divide(item.baseAmount + NP.times(Salary - item.min, item.rate), 12),
+        0
+      );
+      return tax;
+    }
+  });
+  return taxList.find(item => item !== undefined);
 };
