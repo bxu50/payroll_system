@@ -1,0 +1,24 @@
+{
+  "name": "code_challenge_myob",
+  "version": "1.0.0",
+  "description": "This project is the code Challenge of Myob to do a payroll system. It is deployed on Heroku and avaliable on URL: [https://payrollsystemmyob.herokuapp.com](https://payrollsystemmyob.herokuapp.com)",
+  "main": "index.js",
+  "scripts": {
+    "client": "cd client && npm install && npm start ",
+    "server": "cd server && npm install && npm start",
+    "dev": "npm install && concurrently \"npm run server\" \"npm run client\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bxu50/myob_code_challenge.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bxu50/myob_code_challenge/issues"
+  },
+  "homepage": "https://github.com/bxu50/myob_code_challenge#readme",
+  "dependencies": {
+    "concurrently": "^5.0.0"
+  }
+}
