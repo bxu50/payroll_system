@@ -5,33 +5,33 @@ import axios from "axios";
 import { ToastsStore } from "react-toasts";
 
 export const formValidate = () => ({
-  type: "formValidate"
+  type: constants.FORM_VALIDATE
 });
 
 export const changeInputValue = (key, value) => ({
-  type: "changeInputValue",
+  type: constants.CHANGE_INPUT_VALUE,
   key,
   value: fromJS(value)
 });
 
 export const formSubmit = formData => ({
-  type: "formSubmit",
+  type: constants.FORM_SUBMIT,
   formData
 });
 
 export const validateComplete = () => ({
-  type: "validateComplete"
+  type: constants.VALIDATE_COMPLETE
 });
 
 export const validateIncomplete = () => ({
-  type: "validateIncomplete"
+  type: constants.VALIDATE_INCOMPLETE
 });
 
 export const triggerBack = () => ({
-  type: "triggerBack"
+  type: constants.TRIGGER_BACK
 });
 const clearFormBack = () => ({
-  type: "clearFormBack"
+  type: constants.CLEAR_FORM_BACK
 });
 export const postTable = tableData => {
   return dispatch => {

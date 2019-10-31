@@ -57,24 +57,24 @@ const defaultState = fromJS({
 
 export default (state = defaultState, action) => {
   switch (action.type) {
-    case "formValidate":
+    case constants.FORM_VALIDATE:
       return state.set("validated", true);
-    case "changeInputValue":
+    case constants.CHANGE_INPUT_VALUE:
       return state.setIn(["formData", action.key], action.value);
-    case "validateComplete":
+    case constants.VALIDATE_COMPLETE:
       return state.set("Complete", true);
-    case "validateIncomplete":
+    case constants.VALIDATE_INCOMPLETE:
       return state.set("Complete", false);
-    case "triggerBack":
+    case constants.TRIGGER_BACK:
       return state.set("Complete", false);
-    case "clearFormBack":
+    case constants.CLEAR_FORM_BACK:
       return state
         .set("Complete", false)
         .setIn(["formData", "firstName"], "")
         .setIn(["formData", "lastName"], "")
         .setIn(["formData", "salary"], "")
         .setIn(["formData", "superRate"], "");
-    case "formSubmit":
+    case constants.FORM_SUBMIT:
       let Salary = Number(action.formData.get("salary"));
       let SuperRate = Number(action.formData.get("superRate"));
       const TaxCalculation = Salary => {
