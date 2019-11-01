@@ -1,5 +1,4 @@
 import * as constants from "./constants";
-import NP from "number-precision";
 import { fromJS } from "immutable";
 import moment from "moment";
 const defaultState = fromJS({

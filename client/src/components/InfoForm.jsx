@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import styled from "styled-components";
 import Wrapper from "./shared/Wrapper";
 import { Redirect } from "react-router-dom";
@@ -84,7 +84,6 @@ class InfoForm extends Component {
                   value={formData.get("salary")}
                   onChange={handleInputChange("salary")}
                   aria-describedby="inputGroupPrepend"
-                  aria-describedby="inputGroupApend"
                   required
                 />
                 <Form.Control.Feedback type="invalid">

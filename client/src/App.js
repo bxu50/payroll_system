@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import InfoForm from "./components/InfoForm";
 import PayslipTable from "./components/PayslipTable";
 import { Provider } from "react-redux";

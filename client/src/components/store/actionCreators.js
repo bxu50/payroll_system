@@ -26,7 +26,7 @@ export const dataCalculation = formData => ({
   GrossIncome: fromJS(NP.round(formData.get("salary") / 12, 0)),
   Tax: fromJS(FindTax(formData.get("salary"))),
   NetIncome: fromJS(
-    NP.round(formData.get("salary") / 12 - FindTax(formData.get("salary")),0)
+    NP.round(formData.get("salary") / 12 - FindTax(formData.get("salary")), 0)
   ),
   Super: fromJS(
     NP.round(
@@ -39,14 +39,15 @@ export const dataCalculation = formData => ({
   ),
   Pay: fromJS(
     NP.round(
-    NP.minus(
-      formData.get("salary") / 12 - FindTax(formData.get("salary")),
+      NP.minus(
+        formData.get("salary") / 12 - FindTax(formData.get("salary")),
         NP.times(
           formData.get("salary") / 12,
           NP.times(formData.get("superRate"), 0.01)
         )
-      )
-    ,0)
+      ),
+      0
+    )
   )
 });
 
@@ -111,7 +112,7 @@ const taxRate = [
   },
   {
     min: 180000,
-    max: null,
+    max: Infinity,
     rate: 0.45,
     baseAmount: 54232
   }
@@ -119,7 +120,7 @@ const taxRate = [
 const FindTax = Salary => {
   const taxList = taxRate.map(item => {
     let tax;
-    if (Salary > item.min && Salary < item.max) {
+    if (Salary > item.min && Salary <= item.max) {
       tax = NP.round(
         NP.divide(item.baseAmount + NP.times(Salary - item.min, item.rate), 12),
         0
