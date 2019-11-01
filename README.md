@@ -23,10 +23,6 @@ As this project has a server side and a client side
 1. run the server and frontend at same time `npm run dev`, front-end will running on port 3000, the server will run on 5000
 2. open [http://localhost:3000](http://localhost:3000)
 
-### running test
-1. make sure to run npm run dev first and keep the server running
-2. `npm run test` to lauch the test
-
 ## Demo
 ![payroll demo](/demo.gif)
 

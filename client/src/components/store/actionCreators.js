@@ -1,6 +1,7 @@
 import * as constants from "./constants";
 import { fromJS } from "immutable";
 import "react-toastify/dist/ReactToastify.css";
+import NP from "number-precision";
 import axios from "axios";
 import { ToastsStore } from "react-toasts";
 
@@ -20,7 +21,33 @@ export const formSubmit = formData => ({
 });
 export const dataCalculation = formData => ({
   type: constants.DATA_CALCULATION,
-  formData
+  Salary: Number(formData.get("salary")),
+  SuperRate: Number(formData.get("superRate")),
+  GrossIncome: fromJS(NP.round(formData.get("salary") / 12, 0)),
+  Tax: fromJS(FindTax(formData.get("salary"))),
+  NetIncome: fromJS(
+    NP.round(formData.get("salary") / 12 - FindTax(formData.get("salary")),0)
+  ),
+  Super: fromJS(
+    NP.round(
+      NP.times(
+        formData.get("salary") / 12,
+        NP.times(formData.get("superRate"), 0.01)
+      ),
+      0
+    )
+  ),
+  Pay: fromJS(
+    NP.round(
+    NP.minus(
+      formData.get("salary") / 12 - FindTax(formData.get("salary")),
+        NP.times(
+          formData.get("salary") / 12,
+          NP.times(formData.get("superRate"), 0.01)
+        )
+      )
+    ,0)
+  )
 });
 
 export const validateComplete = () => ({
@@ -56,4 +83,49 @@ export const postTable = tableData => {
         }
       });
   };
+};
+const taxRate = [
+  {
+    min: 0,
+    max: 18200,
+    rate: 0,
+    baseAmount: 0
+  },
+  {
+    min: 18200,
+    max: 37000,
+    rate: 0.19,
+    baseAmount: 0
+  },
+  {
+    min: 37000,
+    max: 87000,
+    rate: 0.325,
+    baseAmount: 3572
+  },
+  {
+    min: 87000,
+    max: 180000,
+    rate: 0.37,
+    baseAmount: 19822
+  },
+  {
+    min: 180000,
+    max: null,
+    rate: 0.45,
+    baseAmount: 54232
+  }
+];
+const FindTax = Salary => {
+  const taxList = taxRate.map(item => {
+    let tax;
+    if (Salary > item.min && Salary < item.max) {
+      tax = NP.round(
+        NP.divide(item.baseAmount + NP.times(Salary - item.min, item.rate), 12),
+        0
+      );
+      return tax;
+    }
+  });
+  return taxList.find(item => item !== undefined);
 };

@@ -80,22 +80,13 @@ export default (state = defaultState, action) => {
         .setIn(["formData", "superRate"], "");
 
     case constants.DATA_CALCULATION:
-      let Salary = Number(action.formData.get("salary"));
-      let SuperRate = Number(action.formData.get("superRate"));
-      let GrossIncome = fromJS(NP.round(Salary / 12, 0));
-      let Tax = fromJS(FindTax(Salary));
-      let NetIncome = fromJS(GrossIncome - Tax);
-      let Super = fromJS(
-        NP.round(NP.times(GrossIncome, NP.times(SuperRate, 0.01)), 0)
-      );
-      let Pay = fromJS(NP.minus(NetIncome, Super));
       return state
         .setIn(["tableData", "payPeriod", "value"], moment().date(28))
-        .setIn(["tableData", "grossIncome", "value"], GrossIncome)
-        .setIn(["tableData", "incomeTax", "value"], Tax)
-        .setIn(["tableData", "netIncome", "value"], NetIncome)
-        .setIn(["tableData", "super", "value"], Super)
-        .setIn(["tableData", "pay", "value"], Pay);
+        .setIn(["tableData", "grossIncome", "value"], action.GrossIncome)
+        .setIn(["tableData", "incomeTax", "value"], action.Tax)
+        .setIn(["tableData", "netIncome", "value"], action.NetIncome)
+        .setIn(["tableData", "super", "value"], action.Super)
+        .setIn(["tableData", "pay", "value"], action.Pay);
     case constants.FORM_SUBMIT:
       return state
         .setIn(
@@ -117,49 +108,4 @@ export default (state = defaultState, action) => {
     default:
       return state;
   }
-};
-const taxRate = [
-  {
-    min: 0,
-    max: 18200,
-    rate: 0,
-    baseAmount: 0
-  },
-  {
-    min: 18200,
-    max: 37000,
-    rate: 0.19,
-    baseAmount: 0
-  },
-  {
-    min: 37000,
-    max: 87000,
-    rate: 0.325,
-    baseAmount: 3572
-  },
-  {
-    min: 87000,
-    max: 180000,
-    rate: 0.37,
-    baseAmount: 19822
-  },
-  {
-    min: 180000,
-    max: null,
-    rate: 0.45,
-    baseAmount: 54232
-  }
-];
-const FindTax = Salary => {
-  const taxList = taxRate.map(item => {
-    let tax;
-    if (Salary > item.min && Salary < item.max) {
-      tax = NP.round(
-        NP.divide(item.baseAmount + NP.times(Salary - item.min, item.rate), 12),
-        0
-      );
-      return tax;
-    }
-  });
-  return taxList.find(item => item !== undefined);
 };
