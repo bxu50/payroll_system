@@ -118,7 +118,7 @@ const taxRate = [
   }
 ];
 const FindTax = Salary => {
-  const taxList = taxRate.map(item => {
+  let taxList = taxRate.map(item => {
     let tax;
     if (Salary > item.min && Salary <= item.max) {
       tax = NP.round(
