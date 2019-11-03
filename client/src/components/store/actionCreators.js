@@ -26,12 +26,12 @@ export const dataCalculation = formData => ({
   GrossIncome: fromJS(NP.round(formData.get("salary") / 12, 0)),
   Tax: fromJS(FindTax(formData.get("salary"))),
   NetIncome: fromJS(
-    NP.round(formData.get("salary") / 12 - FindTax(formData.get("salary")), 0)
+    NP.round(NP.divide(formData.get("salary"), 12) - FindTax(formData.get("salary")), 0)
   ),
   Super: fromJS(
     NP.round(
       NP.times(
-        formData.get("salary") / 12,
+        NP.divide(formData.get("salary"), 12),
         NP.times(formData.get("superRate"), 0.01)
       ),
       0
@@ -100,21 +100,21 @@ const taxRate = [
   },
   {
     min: 37000,
-    max: 87000,
+    max: 90000,
     rate: 0.325,
     baseAmount: 3572
   },
   {
-    min: 87000,
+    min: 90000,
     max: 180000,
     rate: 0.37,
-    baseAmount: 19822
+    baseAmount: 20797
   },
   {
     min: 180000,
     max: Infinity,
     rate: 0.45,
-    baseAmount: 54232
+    baseAmount: 54097
   }
 ];
 const FindTax = Salary => {
@@ -130,3 +130,4 @@ const FindTax = Salary => {
   });
   return taxList.find(item => item !== undefined);
 };
+export default FindTax
